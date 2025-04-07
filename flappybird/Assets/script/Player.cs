@@ -59,4 +59,8 @@ public class Player : MonoBehaviour
             spriteRenderer.sprite = sprites[spriteIndex];
         }
     }
+
+
+
+    
 }
