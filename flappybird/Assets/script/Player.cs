@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private Vector3 direction;
-    private SpriteRenderer spriteRenderer;
     public Sprite[] sprites;
-    private int spriteIndex;
-    public float gravity = -9.81f;
     public float strength = 5f;
+    public float gravity = -9.81f;
     public float tilt = 5f;
 
-    // Update is called once per frame
+    private SpriteRenderer spriteRenderer;
+    private Vector3 direction;
+    private int spriteIndex;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -60,7 +58,13 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Obstacle")) {
+            GameManager.Instance.GameOver();
+        } else if (other.gameObject.CompareTag("Scoring")) {
+            GameManager.Instance.IncreaseScore();
+        }
+    }
 
-
-    
 }
